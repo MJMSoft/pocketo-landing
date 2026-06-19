@@ -1,0 +1,76 @@
+---
+import { ORDER, DELIVERY } from '../consts';
+import Placeholder from './Placeholder.astro';
+---
+
+<section
+  id="top"
+  class="relative isolate overflow-hidden"
+>
+  <!-- Hero light: a single coral wash top-right over the navy, per the brand gradient. -->
+  <div
+    class="pointer-events-none absolute -right-32 -top-40 -z-10 h-[42rem] w-[42rem] rounded-full opacity-60 blur-[120px]"
+    style="background: radial-gradient(circle, rgba(244,164,124,0.30), rgba(232,113,74,0.08) 45%, transparent 70%);"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div
+    class="mx-auto grid min-h-[calc(100dvh-4rem)] max-w-7xl grid-cols-1 items-center gap-12 px-5 pb-16 pt-16 sm:px-8 lg:grid-cols-12 lg:gap-8 lg:pt-20"
+  >
+    <!-- Copy column -->
+    <div data-hero class="lg:col-span-7 lg:pr-4">
+      <h1
+        class="font-display text-[2.5rem] font-semibold leading-[1.05] tracking-tight text-cream sm:text-5xl lg:text-[3.25rem]"
+      >
+        <span class="block">Comida caleña congelada.</span>
+        <span class="block text-coral">Lista en 8 minutos.</span>
+      </h1>
+
+      <p class="mt-6 max-w-[48ch] text-lg text-mist sm:text-xl">
+        Chuleta valluna y más, hechos como en casa. Pedidos por WhatsApp y
+        entregas en Cali los jueves y sábados.
+      </p>
+
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <a
+          href={ORDER.menu}
+          class="btn-primary inline-flex items-center justify-center rounded-2xl bg-coral px-7 py-3.5 text-base font-semibold text-ink"
+        >
+          Ver la carta
+        </a>
+        <a
+          href={ORDER.store}
+          class="btn-secondary inline-flex items-center justify-center rounded-2xl border border-line px-7 py-3.5 text-base font-semibold text-cream"
+        >
+          Pedir ahora
+        </a>
+      </div>
+    </div>
+
+    <!-- Asset column: editorial product slot + a real delivery info card (asymmetric stack) -->
+    <div class="lg:col-span-5">
+      <div data-reveal class="relative">
+        <Placeholder
+          label="Chuleta valluna"
+          note="apanada, sin hueso, lista para freír"
+          aspect="aspect-[4/5]"
+        />
+        <div
+          class="mt-4 flex items-center justify-between rounded-2xl border border-line bg-surface px-5 py-4"
+        >
+          <div>
+            <p class="text-sm text-mist">Entregas en {DELIVERY.city}</p>
+            <p class="font-display text-lg font-semibold text-cream">
+              {DELIVERY.days}
+            </p>
+          </div>
+          <span
+            class="rounded-2xl bg-coral/15 px-3 py-1.5 text-sm font-medium text-coral"
+            >Listo en 8 min</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

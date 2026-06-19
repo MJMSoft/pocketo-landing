@@ -1,0 +1,138 @@
+---
+import Placeholder from './Placeholder.astro';
+import { ORDER, WHATSAPP, STREET } from '../consts';
+
+const lines = [
+  {
+    name: 'Pocketo Home',
+    slot: 'Comida congelada a domicilio',
+    body: 'Comida artesanal congelada con entrega en Cali. Pide por WhatsApp o por nuestra tienda en línea. Entregas los jueves y sábados.',
+    cta: { label: 'Pedir por WhatsApp', href: WHATSAPP.link },
+    secondary: { label: 'Ver la carta', href: ORDER.menu },
+    image: { label: 'Pocketo Home', note: 'directo a tu congelador' },
+  },
+  {
+    name: 'Pocketo Street',
+    slot: 'Punto físico en el Olímpico',
+    body: 'Street food caleño recién hecho. Pásate por el punto y come en el momento.',
+    meta: [
+      { k: 'Dónde', v: STREET.address },
+      { k: 'Cuándo', v: STREET.hours },
+    ],
+    cta: { label: 'Ver ubicación', href: STREET.maps },
+    image: { label: 'Pocketo Street', note: 'recién hecho, en el punto' },
+  },
+  {
+    name: 'Pocketo Eventos',
+    slot: 'Catering para tu evento',
+    body: 'Comida para cumpleaños, reuniones y eventos privados. Armamos el menú contigo y cotizamos a tu medida.',
+    cta: { label: 'Cotizar para mi evento', href: '/#cotizar', tipo: 'evento' },
+    image: { label: 'Pocketo Eventos', note: 'mesas servidas, sabor de casa' },
+  },
+  {
+    name: 'Pocketo Al Por Mayor',
+    slot: 'Distribución mayorista',
+    body: 'Vendemos nuestros congelados (chuleta valluna y más) a restaurantes, tiendas y distribuidores. Cotización por volumen.',
+    cta: { label: 'Cotizar al por mayor', href: '/#cotizar', tipo: 'mayor' },
+    image: { label: 'Al Por Mayor', note: 'volumen para tu negocio' },
+  },
+];
+---
+
+<section id="lineas" class="border-t border-line bg-surface-2">
+  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+    <div data-reveal class="max-w-2xl">
+      <h2
+        class="font-display text-3xl font-semibold leading-tight tracking-tight text-cream sm:text-5xl"
+      >
+        Cuatro formas de comer Pocketo
+      </h2>
+      <p class="mt-4 text-lg text-mist">
+        El mismo sabor caleño, según como lo necesites: en casa, en el punto, en
+        tu evento o para tu negocio.
+      </p>
+    </div>
+
+    <div class="mt-16 flex flex-col gap-16 sm:gap-24">
+      {
+        lines.map((line, i) => (
+          <article
+            data-reveal
+            class="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-14"
+          >
+            <div
+              class:list={[
+                'lg:col-span-5',
+                i % 2 === 1 && 'lg:order-2',
+              ]}
+            >
+              <Placeholder
+                label={line.image.label}
+                decorative
+                aspect="aspect-[4/3]"
+              />
+            </div>
+
+            <div
+              class:list={[
+                'lg:col-span-7',
+                i % 2 === 1 && 'lg:order-1 lg:pr-10',
+                i % 2 === 0 && 'lg:pl-2',
+              ]}
+            >
+              <p class="text-sm font-medium text-coral">{line.slot}</p>
+              <h3 class="mt-2 font-display text-2xl font-semibold leading-tight tracking-tight text-cream sm:text-4xl">
+                {line.name}
+              </h3>
+              <p class="mt-4 max-w-[52ch] text-lg text-mist">{line.body}</p>
+
+              {line.meta && (
+                <dl class="mt-6 grid gap-4 sm:grid-cols-2">
+                  {line.meta.map((m) => (
+                    <div class="rounded-2xl border border-line bg-surface px-5 py-4">
+                      <dt class="text-sm text-mist">{m.k}</dt>
+                      <dd class="mt-1 font-medium text-cream">{m.v}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+
+              <div class="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <a
+                  href={line.cta.href}
+                  data-tipo={line.cta.tipo}
+                  class="btn-primary inline-flex items-center justify-center rounded-2xl bg-coral px-6 py-3 text-base font-semibold text-ink"
+                >
+                  {line.cta.label}
+                </a>
+                {line.secondary && (
+                  <a
+                    href={line.secondary.href}
+                    class="inline-flex items-center gap-1.5 text-base font-semibold text-cream transition-colors hover:text-coral"
+                  >
+                    {line.secondary.label}
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M3 8h10M9 4l4 4-4 4"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

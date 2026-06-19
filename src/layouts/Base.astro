@@ -1,0 +1,170 @@
+---
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource/pacifico';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE, STREET } from '../consts';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Path to the OG image, relative to site root. */
+  ogImage?: string;
+  /** Canonical path, e.g. "/privacy". Defaults to current URL. */
+  path?: string;
+  /** Render LocalBusiness JSON-LD (home page only). */
+  localBusiness?: boolean;
+  /** Keep this page out of search results (e.g. the thank-you page). */
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  ogImage = '/og-image.png',
+  path,
+  localBusiness = false,
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(path ?? Astro.url.pathname, Astro.site).href;
+const ogImageUrl = new URL(ogImage, Astro.site).href;
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  name: 'Pocketo Street',
+  servesCuisine: 'Comida caleña',
+  description:
+    'Punto físico de Pocketo en Cali: street food caleño recién hecho. Chuleta valluna, empanadas, aborrajados y más.',
+  image: ogImageUrl,
+  url: SITE.url,
+  telephone: '+57-300-000-0000',
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Cra. 37 #10-171, barrio Olímpico',
+    addressLocality: 'Cali',
+    addressRegion: 'Valle del Cauca',
+    addressCountry: 'CO',
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Thursday', 'Friday', 'Saturday'],
+      opens: '17:00',
+      closes: '23:00',
+    },
+  ],
+  sameAs: [SITE.instagram],
+};
+---
+
+<!doctype html>
+<html lang="es-CO">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#0a1428" />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Pocketo" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    {
+      localBusiness && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(localBusinessSchema)}
+        />
+      )
+    }
+
+    <!--
+      Flag the document as motion-capable BEFORE first paint, but only when the
+      user has not requested reduced motion. CSS keys all pre-hide states off
+      this attribute, so no-JS and reduced-motion users see fully visible content.
+    -->
+    <script is:inline>
+      if (
+        window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+      ) {
+        document.documentElement.setAttribute('data-motion', '');
+      }
+    </script>
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-2xl focus:bg-coral focus:px-4 focus:py-2 focus:font-medium focus:text-ink"
+      >Saltar al contenido</a
+    >
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      import { animate, inView, stagger } from 'motion';
+
+      const motionOn =
+        document.documentElement.hasAttribute('data-motion');
+
+      if (motionOn) {
+        const easeExpo = [0.16, 1, 0.3, 1] as [number, number, number, number];
+
+        // Hero: staggered fade + short slide-up. Purpose: establish reading
+        // order on first paint (headline, then promise, then the two CTAs).
+        const heroGroups = document.querySelectorAll<HTMLElement>('[data-hero]');
+        heroGroups.forEach((group) => {
+          const items = Array.from(group.children) as HTMLElement[];
+          animate(
+            items,
+            { opacity: [0, 1], transform: ['translateY(12px)', 'translateY(0px)'] },
+            { duration: 0.6, delay: stagger(0.08), ease: easeExpo }
+          );
+        });
+
+        // Scroll reveals: fade + subtle slide-up as sections enter the viewport.
+        // Purpose: storytelling cadence, one section at a time. Fires once.
+        inView(
+          '[data-reveal]',
+          (element) => {
+            const el = element as HTMLElement;
+            if (el.dataset.revealed) return;
+            el.dataset.revealed = 'true';
+            animate(
+              el,
+              { opacity: [0, 1], transform: ['translateY(16px)', 'translateY(0px)'] },
+              { duration: 0.6, ease: easeExpo }
+            );
+          },
+          { margin: '0px 0px -12% 0px' }
+        );
+      }
+    </script>
+  </body>
+</html>

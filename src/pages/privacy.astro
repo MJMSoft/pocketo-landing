@@ -1,0 +1,71 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { SITE } from '../consts';
+---
+
+<Legal
+  title="Política de Privacidad | Pocketo"
+  description="Cómo Pocketo recolecta, usa y protege tu información cuando interactúas con nosotros por WhatsApp, nuestro sitio web y nuestra tienda en línea."
+  path="/privacy"
+  heading="Política de Privacidad"
+  updated="19 de junio de 2026"
+>
+  <p>
+    En Pocketo respetamos tu privacidad. Esta política explica qué información
+    recolectamos cuando interactúas con nosotros por WhatsApp, nuestro sitio
+    web, o nuestra tienda en línea, y cómo la usamos.
+  </p>
+
+  <h2>1. Información que recolectamos</h2>
+  <ul>
+    <li>
+      Nombre, número de WhatsApp, dirección de entrega y datos de contacto que
+      nos compartes para procesar tu pedido o cotización.
+    </li>
+    <li>
+      Mensajes que intercambias con nuestro chatbot o nuestro equipo en
+      WhatsApp.
+    </li>
+    <li>Información básica de navegación en nuestro sitio web (cookies técnicas).</li>
+  </ul>
+
+  <h2>2. Cómo usamos tu información</h2>
+  <ul>
+    <li>Para procesar y entregar tus pedidos.</li>
+    <li>Para responder a tus solicitudes de cotización.</li>
+    <li>Para enviarte información sobre tu pedido en curso por WhatsApp.</li>
+    <li>Para mejorar nuestro servicio.</li>
+  </ul>
+
+  <h2>3. Con quién compartimos tu información</h2>
+  <p>
+    No vendemos ni alquilamos tu información personal. La compartimos únicamente
+    con:
+  </p>
+  <ul>
+    <li>
+      Plataformas que usamos para operar (Meta/WhatsApp, OlaClick, servicios de
+      domicilio).
+    </li>
+    <li>Autoridades cuando la ley lo exija.</li>
+  </ul>
+
+  <h2>4. Tus derechos</h2>
+  <p>
+    Puedes pedir acceso, corrección, o eliminación de tus datos personales
+    escribiéndonos a <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. Consulta
+    también nuestra <a href="/data-deletion">política de eliminación de datos</a>.
+  </p>
+
+  <h2>5. Cambios a esta política</h2>
+  <p>
+    Podemos actualizar esta política. La fecha de última actualización aparece
+    arriba.
+  </p>
+
+  <h2>6. Contacto</h2>
+  <p>
+    Para cualquier pregunta sobre esta política, o para temas legales,
+    escríbenos a <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+  </p>
+</Legal>

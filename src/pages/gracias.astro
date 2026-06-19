@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import { ORDER, WHATSAPP } from '../consts';
+---
+
+<Base
+  title="Solicitud recibida | Pocketo"
+  description="Recibimos tu solicitud de cotización. Te escribimos por WhatsApp en menos de 24 horas."
+  path="/gracias"
+  noindex
+>
+  <section
+    class="mx-auto flex min-h-[calc(100dvh-4rem)] max-w-2xl flex-col items-start justify-center px-5 py-20 sm:px-8"
+  >
+    <div data-hero>
+      <h1
+        class="font-display text-4xl font-semibold leading-tight tracking-tight text-cream sm:text-6xl"
+      >
+        Recibido.
+      </h1>
+      <p class="mt-5 max-w-[42ch] text-lg text-mist sm:text-xl">
+        Te escribimos por WhatsApp en menos de 24 horas. Gracias por pensar en
+        Pocketo.
+      </p>
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+        <a
+          href="/"
+          class="btn-primary inline-flex items-center justify-center rounded-2xl bg-coral px-7 py-3.5 text-base font-semibold text-ink"
+        >
+          Volver al inicio
+        </a>
+        <a
+          href={ORDER.menu}
+          class="btn-secondary inline-flex items-center justify-center rounded-2xl border border-line px-7 py-3.5 text-base font-semibold text-cream"
+        >
+          Ver la carta
+        </a>
+      </div>
+      <p class="mt-8 text-base text-mist">
+        ¿Es urgente? Háblanos directo al
+        <a
+          href={WHATSAPP.link}
+          class="font-medium text-coral underline-offset-4 hover:underline"
+          >{WHATSAPP.display}</a
+        >.
+      </p>
+    </div>
+  </section>
+</Base>

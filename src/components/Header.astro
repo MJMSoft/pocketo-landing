@@ -1,0 +1,130 @@
+---
+import { ORDER } from '../consts';
+
+const nav = [
+  { label: 'Carta', href: '/#destacados' },
+  { label: 'Líneas', href: '/#lineas' },
+  { label: 'Nosotros', href: '/#nosotros' },
+  { label: 'Cotizar', href: '/#cotizar' },
+];
+---
+
+<header
+  class="sticky top-0 z-50 border-b border-line/70 bg-ink/80 backdrop-blur-md"
+>
+  <nav
+    class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-5 sm:px-8"
+    aria-label="Navegación principal"
+  >
+    <a
+      href="/"
+      class="font-script text-3xl leading-none text-coral"
+      aria-label="Pocketo, inicio"
+    >
+      Pocketo
+    </a>
+
+    <ul class="hidden items-center gap-8 md:flex">
+      {
+        nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="text-sm text-mist transition-colors hover:text-cream"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="flex items-center gap-3">
+      <a
+        href={ORDER.store}
+        class="btn-primary hidden rounded-2xl bg-coral px-5 py-2.5 text-sm font-semibold text-ink sm:inline-flex"
+      >
+        Pedir ahora
+      </a>
+
+      <button
+        type="button"
+        id="menu-toggle"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-line text-cream md:hidden"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="relative block h-3 w-5" aria-hidden="true">
+          <span
+            class="absolute left-0 top-0 h-0.5 w-5 rounded bg-current"
+          ></span>
+          <span
+            class="absolute left-0 top-[5px] h-0.5 w-5 rounded bg-current"
+          ></span>
+          <span
+            class="absolute left-0 top-[10px] h-0.5 w-5 rounded bg-current"
+          ></span>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="hidden border-t border-line bg-ink md:hidden"
+  >
+    <ul class="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
+      {
+        nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="block rounded-2xl px-3 py-3 text-base text-cream hover:bg-surface"
+              data-menu-link
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+      <li class="pt-2">
+        <a
+          href={ORDER.store}
+          class="btn-primary block rounded-2xl bg-coral px-3 py-3 text-center text-base font-semibold text-ink"
+          data-menu-link
+        >
+          Pedir ahora
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  if (toggle && menu) {
+    const close = () => {
+      menu.classList.add('hidden');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Abrir menú');
+    };
+    const open = () => {
+      menu.classList.remove('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Cerrar menú');
+    };
+
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      isOpen ? close() : open();
+    });
+
+    menu
+      .querySelectorAll('[data-menu-link]')
+      .forEach((link) => link.addEventListener('click', close));
+  }
+</script>

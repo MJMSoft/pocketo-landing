@@ -1,0 +1,47 @@
+---
+const reasons = [
+  {
+    n: '01',
+    title: 'Sin conservantes raros',
+    body: 'Hecho a mano, como en casa. Sabes exactamente lo que estás comiendo.',
+  },
+  {
+    n: '02',
+    title: 'Porciones para freezer',
+    body: 'Empacado en porciones. Sacas solo lo que vas a comer, cuando quieras.',
+  },
+  {
+    n: '03',
+    title: 'Listo en 8 minutos',
+    body: 'Del congelador a la sartén. Comida de verdad sin cocinar desde cero.',
+  },
+];
+---
+
+<section id="por-que" class="border-t border-line">
+  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+    <div data-reveal class="max-w-2xl">
+      <h2
+        class="font-display text-3xl font-semibold leading-tight tracking-tight text-cream sm:text-5xl"
+      >
+        Por qué la gente repite
+      </h2>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 gap-x-12 gap-y-10 sm:grid-cols-3">
+      {
+        reasons.map((reason) => (
+          <div data-reveal class="border-t border-line pt-6">
+            <span class="font-display text-5xl font-semibold leading-none text-coral sm:text-6xl">
+              {reason.n}
+            </span>
+            <h3 class="mt-5 font-display text-xl font-semibold text-cream">
+              {reason.title}
+            </h3>
+            <p class="mt-2 text-base leading-relaxed text-mist">{reason.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

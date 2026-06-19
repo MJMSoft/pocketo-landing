@@ -1,0 +1,107 @@
+---
+import { SITE, STREET, WHATSAPP, ORDER } from '../consts';
+
+const lineLinks = [
+  { label: 'Pocketo Home', href: '/#lineas' },
+  { label: 'Pocketo Street', href: '/#lineas' },
+  { label: 'Pocketo Eventos', href: '/#cotizar' },
+  { label: 'Pocketo Al Por Mayor', href: '/#cotizar' },
+];
+
+const year = 2026;
+---
+
+<footer class="border-t border-line bg-ink">
+  <div class="mx-auto max-w-7xl px-5 py-16 sm:px-8">
+    <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-12">
+      <!-- Brand -->
+      <div class="lg:col-span-4">
+        <span
+          class="font-script text-4xl leading-none text-transparent"
+          style="background: linear-gradient(100deg, var(--color-coral), var(--color-ember)); -webkit-background-clip: text; background-clip: text;"
+          >Pocketo</span
+        >
+        <p class="mt-4 max-w-xs text-base text-mist">
+          Comida caleña congelada, hecha a mano. Pide, congela y termina en
+          casa.
+        </p>
+        <a
+          href={ORDER.store}
+          class="btn-primary mt-6 inline-flex items-center justify-center rounded-2xl bg-coral px-5 py-2.5 text-sm font-semibold text-ink"
+          >Pedir ahora</a
+        >
+      </div>
+
+      <!-- Lines -->
+      <nav class="lg:col-span-3" aria-label="Líneas de negocio">
+        <h2 class="text-sm font-semibold text-cream">Nuestras líneas</h2>
+        <ul class="mt-4 space-y-3">
+          {
+            lineLinks.map((l) => (
+              <li>
+                <a
+                  href={l.href}
+                  class="text-base text-mist transition-colors hover:text-cream"
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <!-- Street / contacto -->
+      <div class="lg:col-span-3">
+        <h2 class="text-sm font-semibold text-cream">Pocketo Street</h2>
+        <address class="mt-4 space-y-2 text-base not-italic text-mist">
+          <p>{STREET.address}</p>
+          <p>{STREET.hours}</p>
+          <p>
+            <a
+              href={WHATSAPP.link}
+              class="transition-colors hover:text-cream"
+              aria-label={`Escribir a Pocketo por WhatsApp al ${WHATSAPP.display}`}
+              >WhatsApp {WHATSAPP.display}</a
+            >
+          </p>
+        </address>
+      </div>
+
+      <!-- Social + legal -->
+      <div class="lg:col-span-2">
+        <h2 class="text-sm font-semibold text-cream">Síguenos</h2>
+        <ul class="mt-4 space-y-3">
+          <li>
+            <a
+              href={SITE.instagram}
+              class="text-base text-mist transition-colors hover:text-cream"
+              rel="me"
+              aria-label="Instagram de Pocketo">{SITE.instagramHandle}</a
+            >
+          </li>
+          <li>
+            <a
+              href="/privacy"
+              class="text-base text-mist transition-colors hover:text-cream"
+              >Privacidad</a
+            >
+          </li>
+          <li>
+            <a
+              href="/data-deletion"
+              class="text-base text-mist transition-colors hover:text-cream"
+              >Eliminar datos</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div
+      class="mt-14 border-t border-line pt-6 text-sm text-mist"
+    >
+      © {year} Pocketo. Hecho en Cali.
+    </div>
+  </div>
+</footer>

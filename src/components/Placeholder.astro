@@ -1,0 +1,72 @@
+---
+/*
+  Designed editorial image slot. Used until real product / lifestyle photography
+  is dropped in. This is NOT a div-with-text fake screenshot: it is an intentional
+  typographic composition over a tinted navy field with a soft coral light,
+  exactly the placeholder system the brief asks for.
+
+  Two modes:
+  - labeled (default): the name set large, for slots that stand alone (hero, about).
+  - decorative: a faint Pocketo wordmark only, for cards that already show a title
+    next to the image (so the name is not printed twice).
+
+  Replace each instance with a real <img> (AVIF/WebP) when photos are ready.
+*/
+interface Props {
+  label: string;
+  /** Tailwind aspect ratio utility, e.g. "aspect-[4/5]". */
+  aspect?: string;
+  /** Small lowercase descriptor under the name (labeled mode only). */
+  note?: string;
+  /** Hide the name; show a faint branded mark instead. */
+  decorative?: boolean;
+  class?: string;
+}
+const {
+  label,
+  aspect = 'aspect-[4/5]',
+  note,
+  decorative = false,
+  class: className = '',
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    'relative isolate overflow-hidden rounded-3xl border border-line bg-surface',
+    aspect,
+    className,
+  ]}
+  role="img"
+  aria-label={`Espacio para foto de ${label}`}
+>
+  <!-- soft coral light, top-right -->
+  <div
+    class="pointer-events-none absolute -right-1/4 -top-1/3 h-3/4 w-3/4 rounded-full opacity-50 blur-3xl"
+    style="background: radial-gradient(circle, rgba(244,164,124,0.40), transparent 65%);"
+    aria-hidden="true"
+  >
+  </div>
+  <!-- faint base wash -->
+  <div
+    class="pointer-events-none absolute inset-0"
+    style="background: linear-gradient(160deg, rgba(232,113,74,0.10), transparent 55%);"
+    aria-hidden="true"
+  >
+  </div>
+
+  {
+    decorative ? (
+      <div class="absolute inset-0 flex items-center justify-center">
+        <span class="font-script text-3xl text-cream/10 sm:text-4xl">Pocketo</span>
+      </div>
+    ) : (
+      <div class="absolute inset-0 flex flex-col justify-end p-6">
+        <span class="font-display text-2xl font-semibold leading-[1.05] tracking-tight text-cream sm:text-3xl">
+          {label}
+        </span>
+        {note && <span class="mt-1.5 text-sm text-mist">{note}</span>}
+      </div>
+    )
+  }
+</div>

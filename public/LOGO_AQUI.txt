@@ -1,0 +1,17 @@
+Pon aquí los archivos del logo cuando los tengas:
+
+  public/logo.png   (logo completo "Pocketo" sobre el gradiente navy/teal/orange)
+  public/logo.svg   (versión vectorial, opcional)
+
+Estado actual:
+- El header usa la palabra "Pocketo" tipografiada en la fuente script Pacifico,
+  en color coral, sobre el fondo de la página (opción B del brief). No necesita
+  el PNG para verse bien.
+- El footer y la imagen para compartir (Open Graph) usan una versión con el
+  gradiente coral/ember (aproximación del logo completo).
+
+Si subes logo.png y quieres usarlo en el header o el footer, reemplaza el
+wordmark de texto en src/components/Header.astro y src/components/Footer.astro
+por <img src="/logo.png" alt="Pocketo" />.
+
+Puedes borrar este archivo cuando ya no lo necesites.

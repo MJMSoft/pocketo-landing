@@ -1,0 +1,52 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { SITE, WHATSAPP } from '../consts';
+---
+
+<Legal
+  title="Eliminación de Datos | Pocketo"
+  description="Cómo solicitar la eliminación de los datos personales que Pocketo tiene asociados a tu número de WhatsApp o tus pedidos."
+  path="/data-deletion"
+  heading="Política de Eliminación de Datos"
+>
+  <p>
+    Si quieres que eliminemos los datos personales que tenemos asociados a tu
+    número de WhatsApp o tus pedidos en Pocketo, sigue estos pasos:
+  </p>
+
+  <ul>
+    <li>
+      Envíanos un mensaje a nuestro WhatsApp
+      <a href={WHATSAPP.link}>{WHATSAPP.display}</a> con el texto: "Solicito
+      eliminación de mis datos personales".
+    </li>
+    <li>
+      O escríbenos a <a href={`mailto:${SITE.email}`}>{SITE.email}</a> con el
+      mismo mensaje y el número de WhatsApp con el que has interactuado con
+      nosotros.
+    </li>
+    <li>Procesaremos tu solicitud en un máximo de 30 días hábiles.</li>
+  </ul>
+
+  <h2>Qué eliminamos</h2>
+  <ul>
+    <li>Tu historial de conversaciones con nuestro chatbot.</li>
+    <li>Tu información de contacto (nombre, dirección, email).</li>
+    <li>Tu historial de pedidos asociado.</li>
+  </ul>
+
+  <h2>Qué podemos conservar</h2>
+  <p>Por obligaciones legales o fiscales podemos conservar:</p>
+  <ul>
+    <li>
+      Registros de transacciones por el periodo que exija la ley colombiana
+      (típicamente 5 años para soportes fiscales).
+    </li>
+  </ul>
+
+  <h2>Contacto</h2>
+  <p>
+    Si tienes preguntas, escríbenos a
+    <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+  </p>
+</Legal>

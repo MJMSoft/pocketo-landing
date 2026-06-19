@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+/*
+  Pocketo landing - Page Theme Lock: DARK.
+  One accent (coral). Ember is reserved strictly for the logo gradient + footer
+  wordmark, never as a second interactive accent. Radius system: 2xl (16px) on
+  interactive elements, 3xl (24px) on large cards.
+*/
+
+@theme {
+  --color-ink: #0a1428;        /* page background, deep navy */
+  --color-surface: #122036;    /* cards / raised sections */
+  --color-surface-2: #0d1a2e;  /* alternating section tint, same family */
+  --color-cream: #f5e6d8;      /* primary text, warm off-white */
+  --color-mist: #b8a99a;       /* muted subtext */
+  --color-coral: #f4a47c;      /* THE accent */
+  --color-coral-strong: #f6b694;
+  --color-ember: #e8714a;      /* logo gradient only */
+  --color-line: #1f2d45;       /* hairline dividers */
+
+  --font-display: "Bricolage Grotesque Variable", "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Bricolage Grotesque Variable", "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-script: "Pacifico", "Bricolage Grotesque Variable", cursive;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-ink);
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Sticky-nav offset so anchor jumps don't hide section headings under the header */
+[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* Focus states: visible coral ring on every interactive element */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-coral);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background-color: var(--color-coral);
+  color: var(--color-ink);
+}
+
+/*
+  Motion reveal system.
+  Elements are only pre-hidden when JS has flagged the document as motion-capable
+  (no-preference + JS running). Without JS, or under prefers-reduced-motion, the
+  attribute is never set and all content renders fully visible. No FOUC, no
+  content trapped behind a missing animation.
+*/
+html[data-motion] [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: opacity, transform;
+}
+html[data-motion] [data-hero] > * {
+  opacity: 0;
+  transform: translateY(12px);
+  will-change: opacity, transform;
+}
+
+/* Hover affordances gated to real pointers (Emil: avoid sticky hover on touch) */
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary,
+  .btn-secondary {
+    transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1),
+      background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+  }
+  .btn-primary:hover {
+    transform: scale(1.02);
+    background-color: var(--color-coral-strong);
+  }
+  .btn-secondary:hover {
+    transform: scale(1.02);
+    border-color: var(--color-coral);
+    color: var(--color-coral);
+  }
+  .lift {
+    transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 220ms ease, border-color 220ms ease;
+  }
+  .lift:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--color-coral) 35%, var(--color-line));
+    box-shadow: 0 18px 50px -24px rgba(244, 164, 124, 0.45);
+  }
+}
+
+/* Press feedback (Emil: buttons must feel responsive to press) */
+.btn-primary:active,
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary,
+  .btn-secondary,
+  .lift {
+    transition: none;
+  }
+}
