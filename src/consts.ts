@@ -17,11 +17,11 @@ export const ORDER = {
 };
 
 export const WHATSAPP = {
-  // PLACEHOLDER: replace with the real WhatsApp business number (digits only, country code first).
-  number: '573000000000',
-  display: '+57 300 000 0000',
+  number: '573337501653',
+  display: '+57 333 750 1653',
+  message: 'Hola Pocketo, vengo de la página web y quiero hacer un pedido.',
   get link() {
-    return `https://wa.me/${this.number}`;
+    return `https://wa.me/${this.number}?text=${encodeURIComponent(this.message)}`;
   },
 };
 
@@ -37,50 +37,50 @@ export const DELIVERY = {
   city: 'Cali',
 };
 
-// Real catalog (https://pocketo.ola.click/products). `img` matches a file in
-// src/assets/products/<img>.png. Prices are PLACEHOLDERS: the OlaClick menu API
-// is gated, so update PRODUCTS[].price with the real values (ver carta).
+// Real catalog + prices (https://pocketo.ola.click/products). `img` matches a
+// file in src/assets/products/<img>.png. Chuletas se venden por libra y kilo,
+// así que el precio es "Desde" (libra). Si cambian en OlaClick, actualízalos acá.
 export const PRODUCTS = [
   {
-    name: 'Chuleta de Cerdo Especial',
-    note: 'Lomo de cerdo apanado al panko, sin hueso',
-    price: '$XX.XXX COP',
-    img: 'chuleta-cerdo-especial',
-  },
-  {
     name: 'Chuleta de Cerdo Tradicional',
-    note: 'Lomo de cerdo apanado, sin hueso',
-    price: '$XX.XXX COP',
+    note: 'La chuleta valluna de siempre, lomo de cerdo sin hueso',
+    price: 'Desde $19.000',
     img: 'chuleta-cerdo-tradicional',
   },
   {
+    name: 'Chuleta de Cerdo Especial',
+    note: 'Lomo de cerdo con apanado al panko, sin hueso',
+    price: 'Desde $20.000',
+    img: 'chuleta-cerdo-especial',
+  },
+  {
     name: 'Chuleta de Pollo Especial',
-    note: 'Pechuga de pollo apanada al panko, sin hueso',
-    price: '$XX.XXX COP',
+    note: 'Pechuga de pollo con apanado al panko, sin hueso',
+    price: 'Desde $18.000',
     img: 'chuleta-pollo-especial',
   },
   {
     name: 'Chuleta de Pollo Tradicional',
-    note: 'Pechuga de pollo apanada, sin hueso',
-    price: '$XX.XXX COP',
+    note: 'Pechuga de pollo apanada, receta de siempre',
+    price: 'Desde $17.000',
     img: 'chuleta-pollo-tradicional',
   },
   {
     name: 'Camarones Apanados',
-    note: 'Camarones apanados, listos para freír',
-    price: '$XX.XXX COP',
+    note: 'Camarones apanados, congelados por libra',
+    price: '$33.000',
     img: 'camarones-apanados',
   },
   {
-    name: 'Pizza Hawaiana',
-    note: 'Pizza congelada, jamón y piña',
-    price: '$XX.XXX COP',
-    img: 'pizza-hawaiana',
+    name: 'Pizza Pepperoni',
+    note: 'Personal, masa artesanal precocida',
+    price: '$13.000',
+    img: 'pizza-pepperoni',
   },
   {
-    name: 'Pizza Pepperoni',
-    note: 'Pizza congelada con pepperoni',
-    price: '$XX.XXX COP',
-    img: 'pizza-pepperoni',
+    name: 'Pizza Hawaiana',
+    note: 'Personal, jamón y piña sobre masa artesanal',
+    price: '$13.000',
+    img: 'pizza-hawaiana',
   },
 ] as const;
