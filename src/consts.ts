@@ -6,9 +6,17 @@ export const SITE = {
   url: 'https://pocketo.store',
   // PLACEHOLDER: confirm the real contact inbox.
   email: 'hola@pocketo.store',
-  instagram: 'https://instagram.com/pocketo.co',
-  instagramHandle: '@pocketo.co',
+  instagram: 'https://instagram.com/pocketo.col',
+  instagramHandle: '@pocketo.col',
+  facebook: 'https://www.facebook.com/pocketo.col/',
+  tiktok: 'https://www.tiktok.com/@pocketo.col',
 };
+
+export const SOCIALS = [
+  { label: 'Instagram', href: SITE.instagram },
+  { label: 'TikTok', href: SITE.tiktok },
+  { label: 'Facebook', href: SITE.facebook },
+];
 
 export const ORDER = {
   // OlaClick storefront.
