@@ -1,6 +1,10 @@
 ---
-import Placeholder from './Placeholder.astro';
+import { Image } from 'astro:assets';
 import { ORDER, WHATSAPP, STREET } from '../consts';
+import homeImg from '../assets/line-home.png';
+import streetImg from '../assets/line-street.png';
+import eventosImg from '../assets/line-eventos.png';
+import mayorImg from '../assets/line-mayor.png';
 
 const lines = [
   {
@@ -9,32 +13,36 @@ const lines = [
     body: 'Comida artesanal congelada con entrega en Cali. Pide por WhatsApp o por nuestra tienda en línea. Entregas los jueves y sábados.',
     cta: { label: 'Pedir por WhatsApp', href: WHATSAPP.link },
     secondary: { label: 'Ver la carta', href: ORDER.menu },
-    image: { label: 'Pocketo Home', note: 'directo a tu congelador' },
+    img: homeImg,
+    alt: 'Productos Pocketo congelados listos para llevar a casa',
   },
   {
     name: 'Pocketo Street',
     slot: 'Punto físico en el Olímpico',
-    body: 'Street food caleño recién hecho. Pásate por el punto y come en el momento.',
+    body: 'Street food caleño recién hecho. Pásate por el food truck y come en el momento.',
     meta: [
       { k: 'Dónde', v: STREET.address },
       { k: 'Cuándo', v: STREET.hours },
     ],
     cta: { label: 'Ver ubicación', href: STREET.maps },
-    image: { label: 'Pocketo Street', note: 'recién hecho, en el punto' },
+    img: streetImg,
+    alt: 'Food truck de Pocketo en Cali, de noche, con su aviso en neón',
   },
   {
     name: 'Pocketo Eventos',
     slot: 'Catering para tu evento',
     body: 'Comida para cumpleaños, reuniones y eventos privados. Armamos el menú contigo y cotizamos a tu medida.',
     cta: { label: 'Cotizar para mi evento', href: '/#cotizar', tipo: 'evento' },
-    image: { label: 'Pocketo Eventos', note: 'mesas servidas, sabor de casa' },
+    img: eventosImg,
+    alt: 'Pizza Pocketo congelada, ideal para reuniones y eventos',
   },
   {
     name: 'Pocketo Al Por Mayor',
     slot: 'Distribución mayorista',
-    body: 'Vendemos nuestros congelados (chuleta valluna y más) a restaurantes, tiendas y distribuidores. Cotización por volumen.',
+    body: 'Vendemos nuestros productos congelados (chuletas, camarones, pizzas) a restaurantes, tiendas y distribuidores. Cotización por volumen.',
     cta: { label: 'Cotizar al por mayor', href: '/#cotizar', tipo: 'mayor' },
-    image: { label: 'Al Por Mayor', note: 'volumen para tu negocio' },
+    img: mayorImg,
+    alt: 'Camarones apanados Pocketo, producto para distribución al por mayor',
   },
 ];
 ---
@@ -66,11 +74,18 @@ const lines = [
                 i % 2 === 1 && 'lg:order-2',
               ]}
             >
-              <Placeholder
-                label={line.image.label}
-                decorative
-                aspect="aspect-[4/3]"
-              />
+              <div
+                class="overflow-hidden rounded-3xl border border-line bg-surface"
+              >
+                <Image
+                  src={line.img}
+                  alt={line.alt}
+                  width={760}
+                  height={570}
+                  class="aspect-[4/3] w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
             </div>
 
             <div

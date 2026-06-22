@@ -1,6 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import { ORDER, DELIVERY } from '../consts';
-import Placeholder from './Placeholder.astro';
+import heroImg from '../assets/hero.png';
 ---
 
 <section
@@ -51,11 +52,22 @@ import Placeholder from './Placeholder.astro';
     <!-- Asset column: editorial product slot + a real delivery info card (asymmetric stack) -->
     <div class="lg:col-span-5">
       <div data-reveal class="relative">
-        <Placeholder
-          label="Chuleta valluna"
-          note="apanada, sin hueso, lista para freír"
-          aspect="aspect-[4/5]"
-        />
+        <div
+          class="overflow-hidden rounded-3xl border border-line bg-surface"
+        >
+          <Image
+            src={heroImg}
+            alt="Productos Pocketo congelados: chuletas, camarones y pizza, listos para freír"
+            widths={[400, 600, 900]}
+            sizes="(max-width: 1023px) 92vw, 40vw"
+            quality={68}
+            width={900}
+            height={620}
+            class="aspect-[4/3] w-full object-cover"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
         <div
           class="mt-4 flex items-center justify-between rounded-2xl border border-line bg-surface px-5 py-4"
         >

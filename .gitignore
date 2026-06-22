@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # netlify cli local state
 .netlify/
+
+# source photos (originals; optimized copies live in src/assets)
+imagenes/

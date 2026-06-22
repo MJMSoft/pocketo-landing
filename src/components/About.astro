@@ -1,5 +1,6 @@
 ---
-import Placeholder from './Placeholder.astro';
+import { Image } from 'astro:assets';
+import aboutImg from '../assets/about.png';
 ---
 
 <section id="nosotros" class="border-t border-line">
@@ -23,11 +24,16 @@ import Placeholder from './Placeholder.astro';
 
     <div data-reveal class="lg:col-span-6">
       <div class="relative lg:pl-10">
-        <Placeholder
-          label="En la cocina"
-          note="manos, sazón y porciones"
-          aspect="aspect-[5/4]"
-        />
+        <div class="overflow-hidden rounded-3xl border border-line bg-surface">
+          <Image
+            src={aboutImg}
+            alt="Productos Pocketo con la comida ya preparada y servida"
+            width={820}
+            height={656}
+            class="aspect-[5/4] w-full object-cover"
+            loading="lazy"
+          />
+        </div>
       </div>
     </div>
   </div>

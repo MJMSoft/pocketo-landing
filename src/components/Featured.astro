@@ -1,6 +1,14 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { ORDER, PRODUCTS } from '../consts';
-import Placeholder from './Placeholder.astro';
+
+// Resolve product photos from src/assets/products by filename stem.
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/products/*.png',
+  { eager: true }
+);
+const imgFor = (stem: string) => files[`../assets/products/${stem}.png`].default;
 
 const [hero, ...rest] = PRODUCTS;
 ---
@@ -14,8 +22,8 @@ const [hero, ...rest] = PRODUCTS;
         Lo que más piden
       </h2>
       <p class="mt-4 text-lg text-mist">
-        Congelado y porcionado, listo para terminar en tu sartén. Precios
-        finales en la carta.
+        Congelado y porcionado, listo para terminar en tu sartén o tu horno.
+        Precios y carta completa en la tienda.
       </p>
     </div>
 
@@ -25,12 +33,16 @@ const [hero, ...rest] = PRODUCTS;
       data-reveal
       class="lift group mt-12 grid grid-cols-1 overflow-hidden rounded-3xl border border-line bg-surface md:grid-cols-2"
     >
-      <Placeholder
-        label={hero.name}
-        decorative
-        aspect="aspect-[16/11] md:aspect-auto md:h-full md:min-h-[22rem]"
-        class="rounded-none border-0"
-      />
+      <div class="relative aspect-[16/11] md:aspect-auto md:h-full md:min-h-[24rem]">
+        <Image
+          src={imgFor(hero.img)}
+          alt={`${hero.name}, empacada y congelada`}
+          width={900}
+          height={900}
+          class="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+        />
+      </div>
       <div class="flex flex-col justify-center gap-4 p-8 sm:p-10">
         <h3
           class="font-display text-3xl font-semibold leading-tight tracking-tight text-cream sm:text-4xl"
@@ -66,8 +78,8 @@ const [hero, ...rest] = PRODUCTS;
       </div>
     </a>
 
-    <!-- The rest: a row of four -->
-    <div class="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-4">
+    <!-- The rest: a six-up grid -->
+    <div class="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3">
       {
         rest.map((product) => (
           <a
@@ -75,12 +87,16 @@ const [hero, ...rest] = PRODUCTS;
             data-reveal
             class="lift group flex flex-col overflow-hidden rounded-3xl border border-line bg-surface"
           >
-            <Placeholder
-              label={product.name}
-              decorative
-              aspect="aspect-square"
-              class="rounded-none border-0"
-            />
+            <div class="aspect-square">
+              <Image
+                src={imgFor(product.img)}
+                alt={`${product.name}, empacada y congelada`}
+                width={560}
+                height={560}
+                class="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
             <div class="flex flex-1 flex-col gap-2 p-5">
               <h3 class="font-display text-lg font-semibold leading-tight text-cream">
                 {product.name}
